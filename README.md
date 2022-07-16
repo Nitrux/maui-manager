@@ -1,5 +1,5 @@
 # Maui Manager
-![](https://mauiman.org/wp-content/uploads/2018/12/maui_project_logo.png)
+![](https://mauikit.org/wp-content/uploads/2018/12/maui_project_logo.png)
 
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) [![Generic badge](https://img.shields.io/badge/OS-Linux-blue.svg)](https://shields.io/)
 
