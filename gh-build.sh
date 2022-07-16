@@ -32,7 +32,7 @@ DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver keyserver.ubuntu.com --re
 DEBIAN_FRONTEND=noninteractive apt -qq update
 
 ### Install Package Build Dependencies #2
-### Filebrowsing needs ECM > 5.70
+### Mauimnan needs ECM > 5.70
 
 DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
 	qtbase5-dev
@@ -79,7 +79,7 @@ make
 checkinstall -D -y \
 	--install=no \
 	--fstrans=yes \
-	--pkgname=mauiman-git \
+	--pkgname=maui-manager-git \
 	--pkgversion=2.2.0+git+1 \
 	--pkgarch=amd64 \
 	--pkgrelease="1" \
@@ -88,7 +88,7 @@ checkinstall -D -y \
 	--pkgsource=mauiman \
 	--pakdir=../.. \
 	--maintainer=uri_herrera@nxos.org \
-	--provides=mauiman-git \
+	--provides=maui-manager-git \
 	--requires=libc6,libqt5core5a \
 	--nodoc \
 	--strip=no \
