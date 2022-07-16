@@ -95,5 +95,3 @@ checkinstall -D -y \
 	--stripso=yes \
 	--reset-uids=yes \
 	--deldesc=yes
-
-pwd; ls -l
