@@ -31,10 +31,14 @@ DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver keyserver.ubuntu.com --re
 
 DEBIAN_FRONTEND=noninteractive apt -qq update
 
-### Install Package Build Dependencies #1
+### Install Package Build Dependencies #2
+### Filebrowsing needs ECM > 5.70
 
 DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
 	qtbase5-dev
+
+DEBIAN_FRONTEND=noninteractive apt -qq -yy install --only-upgrade \
+	extra-cmake-modules
 
 ### Clone Repository
 
