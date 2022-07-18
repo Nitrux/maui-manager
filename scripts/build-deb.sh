@@ -31,7 +31,7 @@ rm -rf {LICENSE,README.md}
 
 ### Compile Source
 
-mkdir -p mauiman/build && cd mauiman/build
+mkdir -p build && cd build
 
 cmake \
 	-DCMAKE_INSTALL_PREFIX=/usr \
@@ -44,7 +44,7 @@ cmake \
 	-DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON \
 	-DCMAKE_INSTALL_RUNSTATEDIR=/run "-GUnix Makefiles" \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu ..
+	-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu ../mauiman/
 
 make -j$(nproc)
 
