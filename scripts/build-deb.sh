@@ -31,7 +31,7 @@ rm -rf {LICENSE,README.md}
 
 ### Compile Source
 
-mkdir -p build && cd build
+mkdir -p mauiman/build && cd mauiman/build
 
 cmake \
 	-DCMAKE_INSTALL_PREFIX=/usr \
