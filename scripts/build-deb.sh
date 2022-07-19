@@ -25,7 +25,7 @@ DEBIAN_FRONTEND=noninteractive apt -qq update
 # DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
 # 	qtbase5-dev
 
-git clone --depth 1 --branch master https://invent.kde.org/maui/mauiman.git
+git clone --depth 1 --branch $MAUIMAN_BRANCH https://invent.kde.org/maui/mauiman.git
 
 rm -rf {LICENSE,README.md}
 

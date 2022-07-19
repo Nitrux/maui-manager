@@ -3,6 +3,10 @@ name: Maui Manager Deb
 on:
   workflow_dispatch:
     inputs:
+      mauimanBranch:
+        description: 'Maui Manager Branch'
+        required: true
+        type: string
       packageCloudRepo:
         description: 'Package Cloud Repo'
         required: true
@@ -48,6 +52,7 @@ jobs:
         run: ./scripts/build-deb.sh
         env:
           PACKAGE_VERSION: ${{ inputs.packageVersion }}
+          MAUIMAN_BRANCH: ${{ inputs.mauimanBranch }}
 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
