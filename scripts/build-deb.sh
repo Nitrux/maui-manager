@@ -18,12 +18,7 @@ curl -L https://packagecloud.io/nitrux/testing/gpgkey | apt-key add -;
 
 DEBIAN_FRONTEND=noninteractive apt -qq update
 
-### Install Package Build Dependencies #2
-### NX Software Center needs ECM > 5.70
-### NX Software Center needs CMake > 3.19
-
-# DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
-# 	qtbase5-dev
+### Download Source
 
 git clone --depth 1 --branch $MAUIMAN_BRANCH https://invent.kde.org/maui/mauiman.git
 
