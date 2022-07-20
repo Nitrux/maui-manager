@@ -8,19 +8,18 @@ fi
 
 $APT_COMMAND update -q
 $APT_COMMAND install -qy --no-install-recommends \
-	appstream \
-	automake \
-	autotools-dev \
-	build-essential \
-	checkinstall \
-	cmake \
-	curl \
-	devscripts \
-	equivs \
-	extra-cmake-modules \
-	gettext \
-	git \
-	gnupg2 \
-	lintian \
+    appstream \
+    automake \
+    autotools-dev \
+    build-essential \
+    checkinstall \
+    cmake \
+    curl \
+    devscripts \
+    equivs \
+    extra-cmake-modules \
+    gettext \
+    git \
+    gnupg2 \
+    lintian \
     qtbase5-dev
-    
