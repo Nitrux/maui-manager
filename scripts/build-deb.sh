@@ -24,6 +24,10 @@ rm -rf {LICENSE,README.md}
 
 mkdir -p build && cd build
 
+ls -lh \
+	/usr/lib/x86_64-linux-gnu/cmake/
+	/usr/lib/x86_64-linux-gnu/cmake/MauiMan
+
 cmake \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DENABLE_BSYMBOLICFUNCTIONS=OFF \
