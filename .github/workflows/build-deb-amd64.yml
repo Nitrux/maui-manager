@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     container:
-      image: ubuntu:focal
+      image: ubuntu:jammy
       env:
         DEBIAN_FRONTEND: noninteractive
         PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
