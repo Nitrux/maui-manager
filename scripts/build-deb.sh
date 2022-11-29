@@ -24,10 +24,6 @@ rm -rf {LICENSE,README.md}
 
 mkdir -p build && cd build
 
-ls -lh \
-	/usr/lib/x86_64-linux-gnu/cmake/ \
-	/usr/lib/x86_64-linux-gnu/cmake/MauiMan
-
 cmake \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DENABLE_BSYMBOLICFUNCTIONS=OFF \
@@ -41,15 +37,9 @@ cmake \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu ../mauiman/
 
-ls -lh \
-	/usr/lib/x86_64-linux-gnu/cmake/ \
-	/usr/lib/x86_64-linux-gnu/cmake/MauiMan
-
 make -j$(nproc)
 
-ls -lh \
-	/usr/lib/x86_64-linux-gnu/cmake/ \
-	/usr/lib/x86_64-linux-gnu/cmake/MauiMan
+make install
 
 ### Run checkinstall and Build Debian Package
 
