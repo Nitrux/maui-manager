@@ -64,7 +64,7 @@ checkinstall -D -y \
 	--pakdir=. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=maui-manager-git \
-	--requires=libc6,libqt5core5a \
+	--requires=libc6,libqt5core5a,libqt5publishsubscribe5,libqt5serviceframework5,libqt5systeminfo5 \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \

@@ -22,4 +22,5 @@ $APT_COMMAND install -qy --no-install-recommends \
     git \
     gnupg2 \
     lintian \
-    qtbase5-dev
+    qtbase5-dev \
+    qtsystems5-dev
