@@ -2,6 +2,23 @@
 
 set -x
 
+### Update sources
+
+wget -qO /etc/apt/sources.list.d/nitrux-depot.list https://raw.githubusercontent.com/Nitrux/iso-tool/legacy/configs/files/sources/sources.list.nitrux
+
+wget -qO /etc/apt/sources.list.d/nitrux-testing.list https://raw.githubusercontent.com/Nitrux/iso-tool/legacy/configs/files/sources/sources.list.nitrux.testing
+
+curl -L https://packagecloud.io/nitrux/depot/gpgkey | apt-key add -;
+curl -L https://packagecloud.io/nitrux/unison/gpgkey | apt-key add -;
+curl -L https://packagecloud.io/nitrux/testing/gpgkey | apt-key add -;
+
+apt -qq update
+
+### Install Package Build Dependencies #2
+
+apt -qq -yy install --no-install-recommends --only-upgrade \
+	extra-cmake-modules
+
 ### Download Source
 
 git clone --depth 1 --branch $MAUIMAN_BRANCH https://invent.kde.org/maui/mauiman.git
