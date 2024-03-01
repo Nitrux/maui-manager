@@ -17,7 +17,7 @@ apt -qq update
 ### Install Package Build Dependencies #2
 
 apt -qq -yy install --no-install-recommends --only-upgrade \
-	extra-cmake-modules
+	extra-cmake-modules/trixie
 
 ### Download Source
 
