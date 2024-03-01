@@ -5,12 +5,14 @@ set -x
 ### Update sources
 
 wget -qO /etc/apt/sources.list.d/nitrux-depot.list https://raw.githubusercontent.com/Nitrux/iso-tool/legacy/configs/files/sources/sources.list.nitrux
-
 wget -qO /etc/apt/sources.list.d/nitrux-testing.list https://raw.githubusercontent.com/Nitrux/iso-tool/legacy/configs/files/sources/sources.list.nitrux.testing
+wget -qO /etc/apt/sources.list.d/nitrux-unison.list https://raw.githubusercontent.com/Nitrux/iso-tool/legacy/configs/files/sources/sources.list.nitrux.area51
+wget -qO /etc/apt/sources.list.d/nitrux-area51.list https://raw.githubusercontent.com/Nitrux/iso-tool/legacy/configs/files/sources/sources.list.nitrux.area51
 
 curl -L https://packagecloud.io/nitrux/depot/gpgkey | apt-key add -;
-curl -L https://packagecloud.io/nitrux/unison/gpgkey | apt-key add -;
 curl -L https://packagecloud.io/nitrux/testing/gpgkey | apt-key add -;
+curl -L https://packagecloud.io/nitrux/unison/gpgkey | apt-key add -;
+curl -L https://packagecloud.io/nitrux/area51/gpgkey | apt-key add -;
 
 apt -qq update
 
