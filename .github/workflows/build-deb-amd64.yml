@@ -10,10 +10,10 @@ on:
       packageCloudRepo:
         description: 'Package Cloud Repo'
         required: true
-        default: 'testing'
+        default: 'mauikit'
         type: choice
         options:
-        - testing
+        - mauikit
       packageVersion:
         description: 'Package Version'
         required: true
