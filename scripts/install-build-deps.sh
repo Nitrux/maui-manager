@@ -7,21 +7,21 @@ else
 fi
 
 BUILD_DEPS='
-appstream
-automake
-autotools-dev
-build-essential
-checkinstall
-cmake
-curl
-devscripts
-equivs
-extra-cmake-modules
-gettext
-git
-gnupg2
-lintian
-qt6-base-dev
+    appstream
+    automake
+    autotools-dev
+    build-essential
+    checkinstall
+    cmake
+    curl
+    devscripts
+    equivs
+    extra-cmake-modules
+    gettext
+    git
+    gnupg2
+    lintian
+    qt6-base-dev
 '
 
 $APT_COMMAND update -q

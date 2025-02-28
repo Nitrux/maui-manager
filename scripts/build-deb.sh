@@ -6,20 +6,10 @@ set -eu
 
 mkdir -p /etc/apt/keyrings
 
-curl -fsSL https://packagecloud.io/nitrux/depot/gpgkey | gpg --dearmor -o /etc/apt/keyrings/nitrux_depot-archive-keyring.gpg
-curl -fsSL https://packagecloud.io/nitrux/testing/gpgkey | gpg --dearmor -o /etc/apt/keyrings/nitrux_testing-archive-keyring.gpg
-curl -fsSL https://packagecloud.io/nitrux/unison/gpgkey | gpg --dearmor -o /etc/apt/keyrings/nitrux_unison-archive-keyring.gpg
+curl -fsSL https://packagecloud.io/nitrux/mauikit/gpgkey | gpg --dearmor -o /etc/apt/keyrings/nitrux_mauikit-archive-keyring.gpg
 
-cat <<EOF > /etc/apt/sources.list.d/nitrux-depot.list
-deb [signed-by=/etc/apt/keyrings/nitrux_depot-archive-keyring.gpg] https://packagecloud.io/nitrux/depot/debian/ trixie main
-EOF
-
-cat <<EOF > /etc/apt/sources.list.d/nitrux-testing.list
-deb [signed-by=/etc/apt/keyrings/nitrux_testing-archive-keyring.gpg] https://packagecloud.io/nitrux/testing/debian/ trixie main
-EOF
-
-cat <<EOF > /etc/apt/sources.list.d/nitrux-unison.list
-deb [signed-by=/etc/apt/keyrings/nitrux_unison-archive-keyring.gpg] https://packagecloud.io/nitrux/unison/debian/ trixie main
+cat <<EOF > /etc/apt/sources.list.d/nitrux-mauikit.list
+deb [signed-by=/etc/apt/keyrings/nitrux_mauikit-archive-keyring.gpg] https://packagecloud.io/nitrux/mauikit/debian/ trixie main
 EOF
 
 apt -q update
@@ -28,7 +18,7 @@ apt -q update
 
 git clone --depth 1 --branch $MAUIMAN_BRANCH https://invent.kde.org/maui/mauiman.git
 
-rm -rf {LICENSE,README.md}
+rm -rf {LICENSE,LICENSES,docs,.gitignore,.kde-ci.yml,README.md,metainfo.yaml}
 
 ### Compile Source
 
