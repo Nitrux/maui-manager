@@ -46,18 +46,17 @@ jobs:
       - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
 
   build-arm64:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     container:
-      image: debian:testing
+      image: arm64v8/debian
       env:
         DEBIAN_FRONTEND: noninteractive
         PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
 
     steps:
-      - name: Setup arm64 cross-build environment
+      - name: Setup arm64 environment
         run: |
-          apt update
-          apt install -y qemu-user-static binfmt-support crossbuild-essential-arm64 build-essential devscripts equivs git gnupg lintian ruby-full sudo
+          apt update && apt install -y build-essential devscripts equivs git gnupg lintian ruby-full sudo
       - run: gem install package_cloud
       - uses: actions/checkout@v4
       - run: ./scripts/install-build-deps.sh
