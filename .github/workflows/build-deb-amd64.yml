@@ -20,9 +20,8 @@ on:
         type: string
 
 jobs:
-  build-deb:
+  build-amd64:
     runs-on: ubuntu-24.04
-
     container:
       image: debian:testing
       env:
@@ -30,28 +29,45 @@ jobs:
         PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
 
     steps:
-      - name: Install basic packages
-        run: apt -q update && apt -yy install build-essential devscripts equivs git gnupg lintian ruby-full sudo
-
-      - name: Install package cloud
-        run: gem install package_cloud
-
+      - name: Setup amd64 environment
+        run: apt update && apt install -y build-essential devscripts equivs git gnupg lintian ruby-full sudo
+      - run: gem install package_cloud
       - uses: actions/checkout@v4
-      - name: Install build dependencies
-        run: ./scripts/install-build-deps.sh
-
-      - name: Generate deb
-        run: ./scripts/build-deb.sh
+      - run: ./scripts/install-build-deps.sh
+      - run: ./scripts/build-deb.sh
         env:
           PACKAGE_VERSION: ${{ inputs.packageVersion }}
           MAUIMAN_BRANCH: ${{ inputs.mauimanBranch }}
-
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v4
+          TARGET_ARCH: amd64
+      - uses: actions/upload-artifact@v4
         with:
-          name: deb-package
+          name: deb-package-amd64
           path: ./build/*.deb
-          retention-days: 1
-      
-      - name: Upload package to Package Cloud
-        run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
+      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
+
+  build-arm64:
+    runs-on: ubuntu-24.04
+    container:
+      image: debian:testing
+      env:
+        DEBIAN_FRONTEND: noninteractive
+        PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
+
+    steps:
+      - name: Setup arm64 cross-build environment
+        run: |
+          apt update
+          apt install -y qemu-user-static binfmt-support crossbuild-essential-arm64 build-essential devscripts equivs git gnupg lintian ruby-full sudo
+      - run: gem install package_cloud
+      - uses: actions/checkout@v4
+      - run: ./scripts/install-build-deps.sh
+      - run: ./scripts/build-deb.sh
+        env:
+          PACKAGE_VERSION: ${{ inputs.packageVersion }}
+          MAUIMAN_BRANCH: ${{ inputs.mauimanBranch }}
+          TARGET_ARCH: arm64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deb-package-arm64
+          path: ./build/*.deb
+      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
