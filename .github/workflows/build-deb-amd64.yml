@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Install basic packages
-        run: apt-get update -q && apt-get -qy install sudo && apt-get -qy install curl wget gnupg python3-pip patchelf build-essential ruby-full
+        run: apt -q update && apt -yy install build-essential devscripts equivs git gnupg lintian ruby-full sudo
 
       - name: Install package cloud
         run: gem install package_cloud
@@ -54,4 +54,4 @@ jobs:
           retention-days: 1
       
       - name: Upload package to Package Cloud
-        run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/trixie ./build/*.deb
+        run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
