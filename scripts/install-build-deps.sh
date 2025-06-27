@@ -25,7 +25,7 @@
 
 # -- Exit on errors.
 
-set -e
+set -xe
 
 
 # -- Check if running as root.
