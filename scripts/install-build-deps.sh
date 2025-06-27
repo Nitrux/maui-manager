@@ -37,15 +37,25 @@ else
 fi
 
 
+# -- Create directory to stare repository keys.
+
+KEYRING_DIR="/etc/apt/keyrings"
+mkdir -p "${KEYRING_DIR}"
+
+
+
 # -- Add Neon repository.
 
 mkdir -p /etc/apt/keyrings
 
-curl -fsSL https://packagecloud.io/nitrux/mauikit/gpgkey | gpg --dearmor -o /etc/apt/keyrings/kde_neon-archive-keyring.gpg
+add_third_party_repo_keys () {
+    for key in "$@"; do
+        gpg --batch --keyserver hkps://keyserver.ubuntu.com --recv-keys "$key"
+        gpg --batch --yes --output "${KEYRING_DIR}/${key}.gpg" --export "$key"
+    done
+}
 
-cat <<EOF > /etc/apt/sources.list.d/neon-repo.list
-deb [signed-by=/etc/apt/keyrings/kde_neon-archive-keyring.gpg] https://origin.archive.neon.kde.org/stable/ jammy main
-EOF
+add_third_party_repo_keys E6D4736255751E5D
 
 
 # -- Install build packages.
