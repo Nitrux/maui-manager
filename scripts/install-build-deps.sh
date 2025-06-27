@@ -60,7 +60,7 @@ add_repo_key_and_source() {
 
 add_repo_key_and_source \
     "E6D4736255751E5D" \
-    "${KEYRING_DIR}/kde_neon-archive-keyring.gpg" \
+    "/etc/apt/keyrings/kde_neon-archive-keyring.gpg" \
     "/etc/apt/sources.list.d/neon-repo.list" \
     "deb [signed-by=/etc/apt/keyrings/kde_neon-archive-keyring.gpg] https://origin.archive.neon.kde.org/stable/ jammy main"
 
