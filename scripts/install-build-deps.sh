@@ -37,6 +37,17 @@ else
 fi
 
 
+# -- Add Neon repository.
+
+mkdir -p /etc/apt/keyrings
+
+curl -fsSL https://packagecloud.io/nitrux/mauikit/gpgkey | gpg --dearmor -o /etc/apt/keyrings/kde_neon-archive-keyring.gpg
+
+cat <<EOF > /etc/apt/sources.list.d/neon-repo.list
+deb [signed-by=/etc/apt/keyrings/kde_neon-archive-keyring.gpg] https://origin.archive.neon.kde.org/stable/ jammy main
+EOF
+
+
 # -- Install build packages.
 
 $APT_COMMAND update -q
