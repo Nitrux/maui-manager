@@ -37,25 +37,32 @@ else
 fi
 
 
-# -- Create directory to stare repository keys.
+# -- Add third-aprty repository keys.
 
-KEYRING_DIR="/etc/apt/keyrings"
-mkdir -p "${KEYRING_DIR}"
+add_repo_key_and_source() {
+    local key_id="$1"
+    local keyring_file="$2"
+    local source_file="$3"
+    local source_content="$4"
 
+    if ! gpg --list-keys "$key_id" &>/dev/null; then
+        gpg --batch --keyserver hkps://keyserver.ubuntu.com --recv-keys "$key_id"
+    fi
 
+    if ! [ -f "$keyring_file" ] || ! gpg --quiet --with-colons --import-options show-only --import "$keyring_file" | grep -q "$key_id"; then
+        gpg --batch --yes --output "$keyring_file" --export "$key_id"
+    fi
 
-# -- Add Neon repository.
-
-mkdir -p /etc/apt/keyrings
-
-add_third_party_repo_keys () {
-    for key in "$@"; do
-        gpg --batch --keyserver hkps://keyserver.ubuntu.com --recv-keys "$key"
-        gpg --batch --yes --output "${KEYRING_DIR}/${key}.gpg" --export "$key"
-    done
+    if ! grep -Fxq "$source_content" "$source_file" 2>/dev/null; then
+        echo "$source_content" > "$source_file"
+    fi
 }
 
-add_third_party_repo_keys E6D4736255751E5D
+add_repo_key_and_source \
+    "E6D4736255751E5D" \
+    "${KEYRING_DIR}/kde_neon-archive-keyring.gpg" \
+    "/etc/apt/sources.list.d/neon-repo.list" \
+    "deb [signed-by=/etc/apt/keyrings/kde_neon-archive-keyring.gpg] https://origin.archive.neon.kde.org/stable/ jammy main"
 
 
 # -- Install build packages.
