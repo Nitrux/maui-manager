@@ -50,7 +50,7 @@ add_repo_key_and_source() {
     fi
 
     if ! [ -f "$keyring_file" ] || ! gpg --quiet --with-colons --import-options show-only --import "$keyring_file" | grep -q "$key_id"; then
-        gpg --batch --yes --output "$keyring_file" --export "$key_id"
+        gpg --batch --yes --export "$key_id" | gpg --dearmor -o "$keyring_file"
     fi
 
     if ! grep -Fxq "$source_content" "$source_file" 2>/dev/null; then
