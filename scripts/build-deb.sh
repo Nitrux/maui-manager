@@ -83,7 +83,7 @@ checkinstall -D -y \
 	--pakdir=. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=maui-manager \
-	--requires="libc6,libqt6concurrent6,libqt6core6t64,libqt6dbus6,libqt6gui6,libqt6network6,libqt6opengl6,libqt6openglwidgets6,libqt6printsupport6,libqt6sql6,libqt6widgets6,libqt6xml6" \
+	--requires="libc6,libqt6concurrent6,libqt6core6,libqt6dbus6,libqt6gui6,libqt6network6,libqt6opengl6,libqt6openglwidgets6,libqt6printsupport6,libqt6sql6,libqt6widgets6,libqt6xml6" \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \
