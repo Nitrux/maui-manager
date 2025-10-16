@@ -10,10 +10,10 @@ on:
       packageCloudRepo:
         description: 'Package Cloud Repo'
         required: true
-        default: 'zbkit'
+        default: 'zbkit-bullseye'
         type: choice
         options:
-        - zbkit
+        - zbkit-bullseye
       packageVersion:
         description: 'Package Version'
         required: true
