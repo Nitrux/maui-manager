@@ -10,10 +10,10 @@ on:
       packageCloudRepo:
         description: 'Package Cloud Repo'
         required: true
-        default: 'mauikit'
+        default: 'zbkit'
         type: choice
         options:
-        - mauikit
+        - zbkit
       packageVersion:
         description: 'Package Version'
         required: true
@@ -23,14 +23,26 @@ jobs:
   build-amd64:
     runs-on: ubuntu-24.04
     container:
-      image: debian:testing
+      image: debian:stable
       env:
         DEBIAN_FRONTEND: noninteractive
         PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
 
     steps:
+      - name: Update APT sources and upgrade
+        run: |
+          echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/10no-check-valid-until
+          cat <<EOF > /etc/apt/sources.list.d/debian.sources
+          Types: deb
+          URIs: http://snapshot.debian.org/archive/debian/20260331T202859Z
+          Suites: testing testing-updates
+          Components: main non-free non-free-firmware contrib
+          Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+          Architectures: amd64
+          EOF
+          apt update && apt full-upgrade -y
       - name: Setup amd64 environment
-        run: apt update && apt install -y build-essential devscripts equivs git gnupg lintian ruby-full sudo
+        run: apt install -y build-essential devscripts equivs git gnupg lintian ruby-full sudo
       - run: gem install package_cloud
       - uses: actions/checkout@v4
       - run: ./scripts/install-build-deps.sh
@@ -43,20 +55,31 @@ jobs:
         with:
           name: deb-package-amd64
           path: ./build/*.deb
-      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
+      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/bullseye ./build/*.deb
 
   build-arm64:
     runs-on: ubuntu-24.04-arm
     container:
-      image: arm64v8/debian:testing
+      image: arm64v8/debian:stable
       env:
         DEBIAN_FRONTEND: noninteractive
         PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
 
     steps:
-      - name: Setup arm64 environment
+      - name: Update APT sources and upgrade
         run: |
-          apt update && apt install -y build-essential devscripts equivs git gnupg lintian ruby-full sudo
+          echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/10no-check-valid-until
+          cat <<EOF > /etc/apt/sources.list.d/debian.sources
+          Types: deb
+          URIs: http://snapshot.debian.org/archive/debian/20260331T202859Z
+          Suites: testing testing-updates
+          Components: main non-free non-free-firmware contrib
+          Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+          Architectures: arm64
+          EOF
+          apt update && apt full-upgrade -y
+      - name: Setup arm64 environment
+        run: apt install -y build-essential devscripts equivs git gnupg lintian ruby-full sudo
       - run: gem install package_cloud
       - uses: actions/checkout@v4
       - run: ./scripts/install-build-deps.sh
@@ -69,4 +92,4 @@ jobs:
         with:
           name: deb-package-arm64
           path: ./build/*.deb
-      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
+      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/bullseye ./build/*.deb
