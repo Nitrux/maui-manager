@@ -10,10 +10,10 @@ on:
       packageCloudRepo:
         description: 'Package Cloud Repo'
         required: true
-        default: 'zbkit'
+        default: 'mauikit'
         type: choice
         options:
-        - zbkit
+        - mauikit
       packageVersion:
         description: 'Package Version'
         required: true
