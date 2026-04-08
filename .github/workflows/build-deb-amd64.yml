@@ -55,7 +55,7 @@ jobs:
         with:
           name: deb-package-amd64
           path: ./build/*.deb
-      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
+      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/duke ./build/*.deb
 
   build-arm64:
     runs-on: ubuntu-24.04-arm
@@ -92,4 +92,4 @@ jobs:
         with:
           name: deb-package-arm64
           path: ./build/*.deb
-      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
+      - run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/duke ./build/*.deb
