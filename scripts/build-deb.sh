@@ -11,7 +11,7 @@ set -e
 
 # -- Download Source
 
-git clone --depth 1 --branch "$MAUIMAN_BRANCH" https://invent.kde.org/maui/mauiman.git
+git clone --depth 1 --branch "$MAUIMAN_BRANCH" https://github.com/Nitrux/maui-manager-src.git
 
 rm -rf {LICENSE,LICENSES,docs,.gitignore,.kde-ci.yml,README.md,metainfo.yaml}
 
