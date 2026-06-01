@@ -25,8 +25,10 @@ $APT_COMMAND install -y --no-install-recommends \
     appstream \
     automake \
     autotools-dev \
+    build-essential \
     checkinstall \
     cmake \
     extra-cmake-modules \
     gettext \
-    qt6-base-dev
+    qt6-base-dev \
+    qt6-declarative-dev
