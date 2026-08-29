@@ -23,7 +23,7 @@ jobs:
   build-amd64:
     runs-on: ubuntu-24.04
     container:
-      image: debian:stable
+      image: debian:stable-20260713
       env:
         DEBIAN_FRONTEND: noninteractive
         PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
@@ -31,6 +31,9 @@ jobs:
     steps:
       - name: Install CA certificates
         run: apt update && apt install -y ca-certificates
+
+      - name: Divert files conflicting during the APT transition
+        run: dpkg-divert --package util-linux --no-rename --add /usr/bin/logger
 
       - name: Update APT sources and upgrade
         run: |
@@ -43,7 +46,7 @@ jobs:
           Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
           Architectures: amd64
           EOF
-          apt update && apt full-upgrade -y
+          apt update && apt -o Dpkg::Options::=--force-overwrite full-upgrade -y
       - name: Setup amd64 environment
         run: apt install -y build-essential devscripts equivs git gnupg lintian ruby-full sudo
       - run: gem install package_cloud
@@ -63,7 +66,7 @@ jobs:
   build-arm64:
     runs-on: ubuntu-24.04-arm
     container:
-      image: arm64v8/debian:stable
+      image: arm64v8/debian:stable-20260713
       env:
         DEBIAN_FRONTEND: noninteractive
         PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
@@ -71,6 +74,9 @@ jobs:
     steps:
       - name: Install CA certificates
         run: apt update && apt install -y ca-certificates
+
+      - name: Divert files conflicting during the APT transition
+        run: dpkg-divert --package util-linux --no-rename --add /usr/bin/logger
 
       - name: Update APT sources and upgrade
         run: |
@@ -83,7 +89,7 @@ jobs:
           Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
           Architectures: arm64
           EOF
-          apt update && apt full-upgrade -y
+          apt update && apt -o Dpkg::Options::=--force-overwrite full-upgrade -y
       - name: Setup arm64 environment
         run: apt install -y build-essential devscripts equivs git gnupg lintian ruby-full sudo
       - run: gem install package_cloud
