@@ -26,9 +26,11 @@ $APT_COMMAND install -y --no-install-recommends \
     automake \
     autotools-dev \
     build-essential \
-    checkinstall \
-    cmake \
-    extra-cmake-modules \
+    git \
+    meson \
+    ninja-build \
+    pkg-config \
     gettext \
     qt6-base-dev \
+    qt6-base-dev-tools \
     qt6-declarative-dev
