@@ -6,7 +6,7 @@
 
 # -- Exit on errors.
 
-set -e
+set -euo pipefail
 
 
 # -- Check if running as root.
@@ -27,9 +27,10 @@ $APT_COMMAND install -y --no-install-recommends \
     autotools-dev \
     build-essential \
     git \
-    meson \
-    ninja-build \
+    cmake \
+    extra-cmake-modules \
     pkg-config \
+    python3 \
     gettext \
     qt6-base-dev \
     qt6-base-dev-tools \
